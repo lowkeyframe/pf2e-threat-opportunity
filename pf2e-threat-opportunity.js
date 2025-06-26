@@ -46,7 +46,7 @@ Hooks.on('init', () => {
  * @param {JQuery} html The jQuery object representing the HTML content of the message.
  * @param {Object} data The data associated with the message rendering.
  */
-Hooks.on('renderChatMessage', (message, html, data) => {
+Hooks.on('renderChatMessage', async (message, html, data) => { // Made async for message.update()
     // Only process messages that contain a dice roll and originate from the PF2e system.
     // Also, ensure the message has not been processed by this module before to prevent duplicates.
     const isPf2eRoll = message.isRoll && message.rolls.length > 0 && message.flags?.pf2e;
@@ -104,20 +104,37 @@ Hooks.on('renderChatMessage', (message, html, data) => {
         detailClass = "opportunity";
     }
 
-    // If a detail was determined, append it to the chat message.
+    // If a detail was determined, update the chat message's content to persist it.
     if (detailText) {
-        const chatContent = html.find(".message-content");
-        if (chatContent.length) {
-            // Append the new detail div after the main roll result, but within the message-content.
-            chatContent.append(
-                `<div class="pf2e-threat-opportunity-detail ${detailClass}">
-                    <i class="fas fa-exclamation-triangle"></i>
-                    <span>${detailText}</span>
-                </div>`
-            );
-            // Set a flag on the message to indicate it has been processed by this module.
-            message.setFlag("pf2e-threat-opportunity", "processed", true);
-            console.log(`PF2e Threat & Opportunity | Added '${detailText}' to message ${message.id}.`);
+        // Construct the HTML for the detail to be appended
+        const newDetailHtml = `
+            <div class="pf2e-threat-opportunity-detail ${detailClass}">
+                <i class="fas fa-exclamation-triangle"></i>
+                <span>${detailText}</span>
+            </div>
+        `;
+
+        // Update the message's content. We need to parse the existing content, append our new HTML, and then save.
+        // Use a temporary div to parse the existing HTML to avoid issues with invalid HTML strings.
+        const tempDiv = document.createElement('div');
+        tempDiv.innerHTML = message.content;
+
+        const messageContentDiv = tempDiv.querySelector('.message-content');
+        if (messageContentDiv) {
+            messageContentDiv.insertAdjacentHTML('beforeend', newDetailHtml);
+        } else {
+            // Fallback if .message-content is not found (unlikely for PF2e rolls)
+            tempDiv.innerHTML += newDetailHtml;
         }
+
+        const updatedContent = tempDiv.innerHTML;
+
+        // Set the processed flag BEFORE updating the message to prevent re-entry of the hook.
+        message.setFlag("pf2e-threat-opportunity", "processed", true);
+
+        // Update the message in the database.
+        await message.update({ content: updatedContent });
+
+        console.log(`PF2e Threat & Opportunity | Persisted '${detailText}' to message ${message.id}.`);
     }
 });
