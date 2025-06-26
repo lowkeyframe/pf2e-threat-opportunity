@@ -1,0 +1,22 @@
+{
+  "id": "pf2e-threat-opportunity",
+  "title": "PF2e Threat & Opportunity Rolls",
+  "description": "Adds 'Threat' or 'Opportunity' details to PF2e dice rolls based on proximity to the DC.",
+  "version": "1.0.0",
+  "authors": [
+    {
+      "name": "Concept by Ghost and vibe coded by Gemini AI"
+    }
+  ],
+  "compatibility": {
+    "minimum": "11",
+    "verified": "13"
+  },
+  "esmodules": ["pf2e-threat-opportunity.js"],
+  "styles": ["styles/pf2e-threat-opportunity.css"],
+  
+  "system": ["pf2e"],
+  "manifest": "https://example.com/your-module/module.json",
+  "download": "https://example.com/your-module/pf2e-threat-opportunity.zip",
+  "v2": true
+}
