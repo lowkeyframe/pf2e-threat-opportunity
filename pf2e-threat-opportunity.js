@@ -79,14 +79,14 @@ Hooks.on('renderChatMessage', async (message, html, data) => {
     // if dc -1 to -3 (difference: -1, -2, -3)
     // if dc +7 to +9 (difference: 7, 8, 9)
     if ([-1, -2, -3].includes(difference) || [7, 8, 9].includes(difference)) {
-        detailText = game.i18n.localize("Opportunity"); // Assuming localization key exists or will be added
+        detailText = game.i18n.localize("OPPORTUNITY"); // Assuming localization key exists or will be added
         detailClass = "opportunity";
     }
     // Threat conditions:
     // if dc -7 to -9 (difference: -7, -8, -9)
     // if = dc or +2 (difference: 0, 2)
     else if ([-7, -8, -9].includes(difference) || [0, 2].includes(difference)) {
-        detailText = game.i18n.localize("Threat"); // Assuming localization key exists or will be added
+        detailText = game.i18n.localize("THREAT"); // Assuming localization key exists or will be added
         detailClass = "threat";
     }
     // --- END NEW LOGIC ---
@@ -96,7 +96,7 @@ Hooks.on('renderChatMessage', async (message, html, data) => {
         // Construct the HTML for the detail to be appended
         const newDetailHtml = `
             <div class="pf2e-threat-opportunity-detail ${detailClass}">
-                <i class="fas fa-exclamation-triangle"></i>
+                
                 <span>${detailText}</span>
             </div>
         `;
