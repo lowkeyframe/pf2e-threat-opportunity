@@ -18,27 +18,11 @@
 
 /* Styling for Threat */
 .pf2e-threat-opportunity-detail.threat {
-    background: linear-gradient(145deg, #ff6b6b, #e04343); /* Reddish gradient */
-    color: #ffffff;
-    border: 1px solid #c0392b;
-}
-
-.pf2e-threat-opportunity-detail.threat i {
-    color: #ffe066; /* Yellow icon for warning */
+    color: #c0392b;
 }
 
 /* Styling for Opportunity */
 .pf2e-threat-opportunity-detail.opportunity {
-    background: linear-gradient(145deg, #6fd08c, #4CAF50); /* Greenish gradient */
-    color: #ffffff;
-    border: 1px solid #27ae60;
+    color: #27ae60;
 }
 
-.pf2e-threat-opportunity-detail.opportunity i {
-    color: #c9ffcc; /* Lighter green icon for positive */
-}
-
-/* Icon adjustments */
-.pf2e-threat-opportunity-detail i {
-    font-size: 1.1em;
-}
