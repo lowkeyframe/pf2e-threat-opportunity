@@ -13,7 +13,7 @@
     "verified": "13"
   },
   "esmodules": ["pf2e-threat-opportunity.js"],
-  "styles": ["styles/pf2e-threat-opportunity.css"],
+  "styles": ["pf2e-threat-opportunity.css"],
   
   "system": ["pf2e"],
   "manifest": "https://github.com/lowkeyframe/pf2e-threat-opportunity/releases/download/release/module.json",
