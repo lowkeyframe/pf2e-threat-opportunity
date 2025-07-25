@@ -16,7 +16,7 @@
   "styles": ["styles/pf2e-threat-opportunity.css"],
   
   "system": ["pf2e"],
-  "manifest": "https://example.com/your-module/module.json",
-  "download": "https://example.com/your-module/pf2e-threat-opportunity.zip",
+  "manifest": "https://github.com/lowkeyframe/pf2e-threat-opportunity/releases/download/release/module.json",
+  "download": "https://github.com/lowkeyframe/pf2e-threat-opportunity/releases/download/release/pf2e-threat-opportunity.zip",
   "v2": true
 }
